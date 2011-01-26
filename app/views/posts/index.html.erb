@@ -1,0 +1,42 @@
+<html>
+<head>
+
+<div class="block" id="block-lists"> 
+          <div class="secondary-navigation"> 
+            <ul class="wat-cf">             
+              <li class="active"><a href="#block-lists">新闻列表</a></li> 
+            </ul> 
+          </div> 
+          <div class="content"> 
+            <h2 class="title">所有新闻(<%= Post.count() %>)</h2> 
+          
+            <div class="inner"> 
+              <div id="sidebar">
+                  <%=render 'shared/sidebar'%>
+              </div>
+              <% @posts.each do |post| %>
+              <ul class="list"> 
+                <li> 
+                  <div class="left"> 
+                    <a href="#"><img class="avatar" src="images/avatar.png" /></a> 
+                  </div> 
+                  <div class="item"> 
+                    <h2><%= link_to post.title, :controller => "posts", :action => "show", :id => post.id %></h2>                  
+             <br/> <h4>作者：<%= post.users.email %>，有(0)篇评论</h4>
+                    <p><%=raw post.excerpt %></p> 
+                  </div> 
+                </li>          
+              </ul> 
+              <% end %>
+              <%= will_paginate @posts  %>
+            </div> 
+          </div> 
+  
+  <h2><%= link_to '发布新闻', new_post_path %></h2>
+ 
+</div>
+</head>
+<body>
+  
+</body>
+</html>
